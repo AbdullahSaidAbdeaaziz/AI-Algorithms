@@ -21,6 +21,10 @@
     - **Linux**
         - Arch
             > It's Already exist if you use distro `manjaro kde`.
+
+            ```terminal
+            sudo pacman -S python 
+            ```
         - Ubuntu
 
           ```shell
