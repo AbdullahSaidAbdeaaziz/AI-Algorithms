@@ -25,6 +25,7 @@
             ```terminal
             sudo pacman -S python 
             ```
+
         - Ubuntu
 
           ```shell
