@@ -5,13 +5,13 @@ path = ["path : "]
 
 def DFS(graph: dict, initial_state: int, goal_state: int):
     path.append(str(initial_state))
-    if initial_state == goal_state:  # If founded stop (base case)
+    if initial_state == goal_state:  # Find goal state.
         all_path = '->'.join(path[1:])
         print(f"{path[0]}{all_path}")
         time.sleep(2)
     try:
         for leaf in graph[initial_state]:
-            DFS(graph, leaf, goal_state)
+            DFS(graph, leaf, goal_state)  # check another leaf node.
     except KeyError:
         pass
 
@@ -33,7 +33,7 @@ def main():
     initial_state = 1
     goal_state = 4
     DFS(graph, initial_state, goal_state)
-    print("Founded 🥳!")
+    print("YAYA 🥳!")
 
 
 if __name__ == "__main__":
