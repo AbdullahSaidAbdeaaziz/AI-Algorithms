@@ -6,8 +6,7 @@
 - [Requirement](#requirement)
 - [Run](#run)
 - [Algorithms](#algorithms)
-    1. [DFS](#depth-first-search)
-    
+     1. [DFS](#depth-first-search-🔎)
 
 ---
 
@@ -71,3 +70,5 @@
 
 > Travel over tree to Reach Its depth first. For more [depth](https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/)
 
+
+[def]: ###depth-first-search

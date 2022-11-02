@@ -12,19 +12,27 @@ def DFS(graph: dict, initial_state: int, goal_state: int, visited: set):
             print(f"{path[0]}{all_path}")
             return
         try:
+            DFS(graph, initial_state, goal_state, visited)
             for leaf in graph[initial_state]:
                 DFS(graph, leaf, goal_state, visited)  # check another leaf node.
         except KeyError:
             pass
 
 
+# TODO Islam Task
+def BFS(graph: dict, initial_state: int, goal_state: int, visited: set):
+    # down here boy
+    pass
+
+
 def main():
     """
-                     1
+                      1
+                   / |  \
                  /   |   \
                3     4    5
             / | \  /  \
-          7  8 9   6  5
+          7  8  9 6   5
     """
     graph = {
         1: [3, 4, 5],
