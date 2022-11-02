@@ -6,7 +6,10 @@
 - [Requirement](#requirement)
 - [Run](#run)
 - [Algorithms](#algorithms)
-     1. [DFS](#depth-first-search-🔎)
+    1. [DFS]
+
+
+[DFS]: #depth-first-search-🔎
 
 ---
 
