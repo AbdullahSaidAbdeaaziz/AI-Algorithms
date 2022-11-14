@@ -53,15 +53,15 @@ def generate_new_swap_list(index, i, matrix) -> list:
 
 
 def check_direction(current_puzzle: list[int]) -> int:
-    index_blank = current_puzzle.index(-1)  # get value of index
-    temp = current_puzzle.copy()
-    minim = id(int)
+    index_blank: int = current_puzzle.index(-1)  # get value of index
+    temp: list = current_puzzle.copy()
+    minim: int = id(int)
     # right, left, up, down
-    guess_direction = [index_blank + 1, index_blank - 1, index_blank + (len(current_puzzle)//2 - 1), index_blank - (len(current_puzzle)//2 - 1)]
-    available_direction = list(filter(lambda x: 0 <= x < len(current_puzzle), guess_direction))
+    guess_direction: list = [index_blank + 1, index_blank - 1, index_blank + (len(current_puzzle)//2 - 1), index_blank - (len(current_puzzle)//2 - 1)]
+    available_direction: list = list(filter(lambda x: 0 <= x < len(current_puzzle), guess_direction))
     for i in available_direction:
-        minim = min(calculate_heuristic_misplaced_tails(generate_new_swap_list(index_blank, i, temp)), minim)
-        temp = current_puzzle
+        minim: int = min(calculate_heuristic_misplaced_tails(generate_new_swap_list(index_blank, i, temp)), minim)
+        temp: list = current_puzzle
     return minim
 
 
