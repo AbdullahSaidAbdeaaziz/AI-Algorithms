@@ -25,19 +25,19 @@ def BFS(graph: dict, initial_state: int, goal_state: int, visited: set):
     pass
 
 
-'''
-           [
-            [1, 2, 3],
-            [4, 5, 6],
-            [7, 8, -1]
-           ]
- -1 --> blink tail
-'''
 
 
 def calculate_heuristic_misplaced_tails(puzzle: list[list]) -> int:
     """
     calculate of heuristic of misplaced tails to compare for it.
+    '''
+               [
+                1, 2, 3,
+                4, 5, 6,
+                7, 8, -1
+               ]
+        -1 --> blink tail
+    '''
     """
     heuristic_value: int = 0
     for i, inner in enumerate(puzzle):
