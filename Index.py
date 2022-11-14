@@ -59,7 +59,6 @@ def check_direction(current_puzzle: list[int]) -> int:
     # right, left, up, down
     guess_direction = [index_blank + 1, index_blank - 1, index_blank + (len(current_puzzle)//2 - 1), index_blank - (len(current_puzzle)//2 - 1)]
     available_direction = list(filter(lambda x: 0 <= x < len(current_puzzle), guess_direction))
-    print(available_direction)
     for i in available_direction:
         minim = min(calculate_heuristic_misplaced_tails(generate_new_swap_list(index_blank, i, temp)), minim)
         temp = current_puzzle
@@ -94,7 +93,6 @@ def main():
     dl = [8, 5, 4,
           3, 1, 6,
           7, -1, 2]
-    print(calculate_heuristic_misplaced_tails(dl))
     print(check_direction(dl))
 
 
