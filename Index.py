@@ -1,4 +1,3 @@
-import time
 
 path = ["path : "]
 
@@ -25,9 +24,7 @@ def BFS(graph: dict, initial_state: int, goal_state: int, visited: set):
     pass
 
 
-
-
-def calculate_heuristic_misplaced_tails(puzzle: list[list]) -> int:
+def calculate_heuristic_misplaced_tails(puzzle: list[int]) -> int:
     """
     calculate of heuristic of misplaced tails to compare for it.
     '''
@@ -47,6 +44,26 @@ def calculate_heuristic_misplaced_tails(puzzle: list[list]) -> int:
             heuristic_value += 1
 
     return heuristic_value
+
+
+def generate_new_swap_list(index, i, matrix) -> list:
+
+    matrix[index], matrix[i] = matrix[i], matrix[index]
+    return matrix
+
+
+def check_direction(current_puzzle: list[int]) -> int:
+    index_blank = current_puzzle.index(-1)  # get value of index
+    temp = current_puzzle.copy()
+    minim = id(int)
+    # right, left, up, down
+    guess_direction = [index_blank + 1, index_blank - 1, index_blank + (len(current_puzzle)//2 - 1), index_blank - (len(current_puzzle)//2 - 1)]
+    available_direction = list(filter(lambda x: 0 <= x < len(current_puzzle), guess_direction))
+    print(available_direction)
+    for i in available_direction:
+        minim = min(calculate_heuristic_misplaced_tails(generate_new_swap_list(index_blank, i, temp)), minim)
+        temp = current_puzzle
+    return minim
 
 
 def main():
@@ -69,10 +86,16 @@ def main():
     visited = set()
     # DFS(graph, initial_state, goal_state, visited)
     # print("YAY 🥳!")
-    dl = [1, 5, 4,
-          3, 2, 6,
-          7, 8, -1]
+    """
+          0  1  2
+          3  4  5 
+          6  7  8 
+    """
+    dl = [8, 5, 4,
+          3, 1, 6,
+          7, -1, 2]
     print(calculate_heuristic_misplaced_tails(dl))
+    print(check_direction(dl))
 
 
 if __name__ == "__main__":
