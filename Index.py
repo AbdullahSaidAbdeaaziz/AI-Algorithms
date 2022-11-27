@@ -1,3 +1,5 @@
+import random
+
 
 def calculate_heuristic_misplaced_tails(puzzle: list[int]) -> int:
     """
@@ -41,17 +43,17 @@ def check_direction(current_puzzle: list[int]) -> list:
     Returns:
         all possible directions for blank tail to move it in current_puzzle.
     """
-    index_blank = current_puzzle.index(-1)
-    guess_directions = [index_blank + 1,  # left
-                        index_blank - 1,  # right
-                        index_blank - (len(current_puzzle) // 2 - 1),  # down
-                        index_blank + (len(current_puzzle) // 2 - 1)  # up
-                        ]
+    index_blank: int = current_puzzle.index(-1)
+    guess_directions: list = [index_blank + 1,  # left
+                              index_blank - 1,  # right
+                              index_blank - (len(current_puzzle) // 2 - 1),  # down
+                              index_blank + (len(current_puzzle) // 2 - 1)  # up
+                              ]
     # check left & right direction
-    flag = True
+    flag: bool = True
     if index_blank % 3 == 2:
         guess_directions.remove(guess_directions[0])
-        flag = False
+        flag: bool = False
     if index_blank % 3 == 0:
         if not flag:
             guess_directions.remove(guess_directions[0])
@@ -59,35 +61,46 @@ def check_direction(current_puzzle: list[int]) -> list:
             guess_directions.remove(guess_directions[1])
 
     # check up, down direction, and if left & right is valid
-    right_directions = list(filter(lambda x: 0 <= x < len(current_puzzle), guess_directions))
+    right_directions: list = list(filter(lambda x: 0 <= x < len(current_puzzle), guess_directions))
 
     return right_directions
 
 
-def print_grid(grid: list[int]) -> None:
+def print_grid(grid: list[list[int]]) -> None:
     for i, v in enumerate(grid):
-        if i % 3 == 0:
-            print()
-        print(v, "", sep=" ", end="")
-    print("\n#" * 40)
+        for x, j in enumerate(v):
+            if x % 3 == 0:
+                print()
+            print(f"{j} ", end="")
+        print(f"\n{'#' * 40}({i + 1})")
 
 
-def dfs(grid: list[int], visited: set):
-    heuristic_value = calculate_heuristic_misplaced_tails(grid)
-    visited.add(tuple(grid))
-    if heuristic_value == 0:
-        print("found😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍")
-        return
-    possible_moves = check_direction(grid)
-    for i in possible_moves:
-        temp = grid.copy()
-        blank_temp = temp.index(-1)
-        generate_new_swap_list(i, blank_temp, temp)
-        print("begin")
-        print(temp)
-        if tuple(temp) not in visited:
-            dfs(temp, visited)
-        print("end")
+def dfs(grid: list[int]) -> list[list[int]]:
+    """
+
+    Args:
+        grid: initial state of 8-puzzle problem
+
+    Returns:
+        Depth path to reach to goal state of 8-puzzle problem
+    """
+    stack, path = [grid], []
+    while stack:
+        expand_node = stack.pop()
+        if calculate_heuristic_misplaced_tails(expand_node) == 0:
+            path.append(expand_node)
+            break
+        if expand_node in path:
+            continue
+        path.append(expand_node)
+        index_blank = expand_node.index(-1)
+        directions_blank = check_direction(expand_node)
+        for move in directions_blank:
+            expand_node = expand_node.copy()
+            generate_new_swap_list(index_blank, move, expand_node)
+            stack.append(expand_node)
+
+    return path
 
 
 def main():
@@ -95,10 +108,11 @@ def main():
     initial_state = [
         1, 2, 3,  # 0 1 2
         4, 5, 6,  # 3 4 5
-        8, 7, -1  # 6 7 8
+        -1, 8, 7  # 6 7 8
     ]
-    visited = set()
-    dfs(initial_state, visited)  # not finish yet
+    print(f"{'😍' * 40} Start DFS {'😍' * 40}")
+    print_grid(dfs(initial_state))
+    print(f"{'😍' * 40} End DFS {'😍' * 40}")
 
 
 if __name__ == "__main__":
