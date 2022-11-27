@@ -48,17 +48,7 @@
     cd AI-Algorithms
     ```
 
-3. Activate Virtual Environment
-
-    ```shell
-    # for Linux
-    source modules/bin/activate
-
-    # for Windows open `powershell`
-    source modules/bin/Activate.ps1
-    ```
-
-4. Run python file
+3. Run python file
 
     ```python
     python Index.py
