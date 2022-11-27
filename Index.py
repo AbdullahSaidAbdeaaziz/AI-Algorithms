@@ -99,7 +99,8 @@ def dfs(grid: list[int]) -> list[list[int]]:
             expand_node = expand_node.copy()
             generate_new_swap_list(index_blank, move, expand_node)
             stack.append(expand_node)
-
+    if not stack:
+        print("Not solvable")
     return path
 
 
@@ -107,9 +108,15 @@ def main():
     # initial state of problem of 8-puzzle
     initial_state = [
         1, 2, 3,  # 0 1 2
-        4, 5, 6,  # 3 4 5
-        -1, 8, 7  # 6 7 8
+        4, 5, -1,  # 3 4 5
+        6, 7, 8   # 6 7 8
     ]
+    """
+    goal state
+    1 2 3 
+    4 5 6
+    7 8 -1 
+    """
     print(f"{'😍' * 40} Start DFS {'😍' * 40}")
     print_grid(dfs(initial_state))
     print(f"{'😍' * 40} End DFS {'😍' * 40}")
