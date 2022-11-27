@@ -18,7 +18,7 @@
 
 1. Install python on your PC.
     - **Windows**
-        - go to website and Install it [Python](https://www.python.org/downloads/windows/) choose Windows Installer (64 or 32 `depend on you PC`).
+        - go to website and Install it [Python](https://www.python.org/downloads/windows/) choose Windows Installer (64 or 32 `depend on your PC`).
 
     - **Linux**
         - Arch
