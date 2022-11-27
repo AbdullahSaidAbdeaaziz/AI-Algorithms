@@ -1,40 +1,11 @@
-
-path = ["path : "]
-
-
-def DFS(graph: dict, initial_state: int, goal_state: int, visited: set):
-    if initial_state not in visited:
-        path.append(str(initial_state))
-        visited.add(initial_state)
-        if initial_state == goal_state:  # Find goal state.
-            all_path = '->'.join(path[1:])
-            print(f"{path[0]}{all_path}")
-            return
-        try:
-            DFS(graph, initial_state, goal_state, visited)
-            for leaf in graph[initial_state]:
-                DFS(graph, leaf, goal_state, visited)  # check another leaf node.
-        except KeyError:
-            pass
-
-
-# TODO Islam Task
-def BFS(graph: dict, initial_state: int, goal_state: int, visited: set):
-    # down here boy
-    pass
-
-
 def calculate_heuristic_misplaced_tails(puzzle: list[int]) -> int:
     """
-    calculate of heuristic of misplaced tails to compare for it.
-    '''
-               [
-                1, 2, 3,
-                4, 5, 6,
-                7, 8, -1
-               ]
-        -1 --> blink tail
-    '''
+
+    Args:
+        puzzle: current state.
+
+    Returns:
+        calculate no.of mis-placed value not in right place in puzzle.
     """
     heuristic_value: int = 0
     for i, inner in enumerate(puzzle):
@@ -46,60 +17,83 @@ def calculate_heuristic_misplaced_tails(puzzle: list[int]) -> int:
     return heuristic_value
 
 
-def generate_new_swap_list(index, i, matrix) -> list:
+def generate_new_swap_list(index: int, i: int, matrix: list[int]) -> None:
+    """
 
+    Args:
+        index: index in list.
+        i: another index in list.
+        matrix: current list.
+
+    Returns:
+        swap indices(index, i) it's value in matrix to generate new list.
+    """
     matrix[index], matrix[i] = matrix[i], matrix[index]
-    print(index, i)
-    return matrix
 
 
-def check_direction(current_puzzle: list[int]) -> int:
-    index_blank: int = current_puzzle.index(-1)  # get value of index
-    minim: int = id(int)
-    # right, left, up, down
-    guess_direction: list = [index_blank + 1, index_blank - 1, index_blank - (len(current_puzzle)//2 - 1), index_blank + (len(current_puzzle)//2 - 1)]
-    available_direction: list = list(filter(lambda x: 0 <= x < len(current_puzzle), guess_direction))
-    print(available_direction)
-    for i in available_direction:
-        temp: list = current_puzzle.copy()
-        minim: int = min(calculate_heuristic_misplaced_tails(generate_new_swap_list(index_blank, i, temp)), minim)
+def check_direction(current_puzzle: list[int]) -> list:
+    """
+
+    Args:
+        current_puzzle: current state in 8-puzzle.
+
+    Returns:
+        all possible directions for blank tail to move it in current_puzzle.
+    """
+    index_blank = current_puzzle.index(-1)
+    guess_directions = [index_blank + 1,  # left
+                        index_blank - 1,  # right
+                        index_blank - (len(current_puzzle) // 2 - 1),  # down
+                        index_blank + (len(current_puzzle) // 2 - 1)  # up
+                        ]
+    # check left & right direction
+    flag = True
+    if index_blank % 3 == 2:
+        guess_directions.remove(guess_directions[0])
+        flag = False
+    if index_blank % 3 == 0:
+        if not flag:
+            guess_directions.remove(guess_directions[0])
+        else:
+            guess_directions.remove(guess_directions[1])
+
+    # check up, down direction, and if left & right is valid
+    right_directions = list(filter(lambda x: 0 <= x < len(current_puzzle), guess_directions))
+
+    return right_directions
+
+
+def print_grid(grid: list[int]) -> None:
+    for i, v in enumerate(grid):
+        if i % 3 == 0:
+            print()
+        print(v, "", sep=" ", end="")
+    print("\n#" * 40)
+
+
+def dfs(grid: list[int]):
+    heuristic_value = calculate_heuristic_misplaced_tails(grid)
+    if heuristic_value == 0:
+        return
+    possible_moves = check_direction(grid)
+    for i in possible_moves:
+        temp = grid.copy()
+        blank_temp = temp.index(-1)
+        generate_new_swap_list(i, blank_temp, temp)
         print(temp)
-        print(minim)
-        temp: list = current_puzzle
-    return minim
+        dfs(temp)
+        if calculate_heuristic_misplaced_tails(temp) == 0:
+            break
 
 
 def main():
-    """
-                     1
-                   / | \
-                 /   |  \
-               3     4   5
-            / | \  /  \
-          7  8  9 6   5
-    """
-    graph = {
-        1: [3, 4, 5],
-        3: [7, 8, 4],
-        4: [6, 5],
-        5: []
-    }
-    initial_state = 1
-    goal_state = 4
-    visited = set()
-    # DFS(graph, initial_state, goal_state, visited)
-    # print("YAY 🥳!")
-    """
-          0  1  2
-          3  4  5 
-          6  7  8 
-    """
-    dl = [8, 5, 4,
-          3, -1, 6,
-          7, 1, 2]
-    print(dl)
-    print("#"*40)
-    print(check_direction(dl))
+    # initial state of problem of 8-puzzle
+    initial_state = [
+        1, 2, 3,  # 0 1 2
+        4, 5, 6,  # 3 4 5
+        8, -1, 7  # 6 7 8
+    ]
+    dfs(initial_state) # not finish yet
 
 
 if __name__ == "__main__":
