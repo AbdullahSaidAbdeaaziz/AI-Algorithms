@@ -1,3 +1,4 @@
+
 def calculate_heuristic_misplaced_tails(puzzle: list[int]) -> int:
     """
 
@@ -71,19 +72,22 @@ def print_grid(grid: list[int]) -> None:
     print("\n#" * 40)
 
 
-def dfs(grid: list[int]):
+def dfs(grid: list[int], visited: set):
     heuristic_value = calculate_heuristic_misplaced_tails(grid)
+    visited.add(tuple(grid))
     if heuristic_value == 0:
+        print("found😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍😍")
         return
     possible_moves = check_direction(grid)
     for i in possible_moves:
         temp = grid.copy()
         blank_temp = temp.index(-1)
         generate_new_swap_list(i, blank_temp, temp)
+        print("begin")
         print(temp)
-        dfs(temp)
-        if calculate_heuristic_misplaced_tails(temp) == 0:
-            break
+        if tuple(temp) not in visited:
+            dfs(temp, visited)
+        print("end")
 
 
 def main():
@@ -91,9 +95,10 @@ def main():
     initial_state = [
         1, 2, 3,  # 0 1 2
         4, 5, 6,  # 3 4 5
-        8, -1, 7  # 6 7 8
+        8, 7, -1  # 6 7 8
     ]
-    dfs(initial_state) # not finish yet
+    visited = set()
+    dfs(initial_state, visited)  # not finish yet
 
 
 if __name__ == "__main__":
