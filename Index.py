@@ -1,3 +1,5 @@
+import time
+
 
 def calculate_heuristic_misplaced_tails(puzzle: list[int]) -> int:
     """
@@ -64,6 +66,20 @@ def check_direction(current_puzzle: list[int]) -> list:
     return right_directions
 
 
+def get_inversion_count(grid: list[int]) -> int:
+    inv_count = 0
+    for i in range(0, 9):
+        for j in range(i + 1, 9):
+            if grid[j] != -1 and grid[i] != -1 and grid[i] > grid[j]:
+                inv_count += 1
+    return inv_count
+
+
+def is_solvable(grid: list[int]) -> bool:
+    inversion_count = get_inversion_count(grid)
+    return inversion_count % 2 == 0
+
+
 def print_grid(grid: list[list[int]]) -> None:
     if not grid:
         return
@@ -84,6 +100,9 @@ def dfs(grid: list[int]) -> None:
     Returns:
         Depth path to reach to goal state of 8-puzzle problem
     """
+    if not is_solvable(grid):
+        print("this is state is not solvable in 8-puzzle")
+        return None
     stack, path = [grid], []
     while stack:
         expand_node = stack.pop()
@@ -96,12 +115,10 @@ def dfs(grid: list[int]) -> None:
         index_blank = expand_node.index(-1)
         directions_blank = check_direction(expand_node)
         for move in directions_blank:
-            expand_node = expand_node.copy()
-            generate_new_swap_list(index_blank, move, expand_node)
-            stack.append(expand_node)
-    if not stack:
-        print("Not solvable 😢")
-        return None
+            expand_node_temp = expand_node.copy()
+            generate_new_swap_list(index_blank, move, expand_node_temp)
+            if is_solvable(expand_node_temp):
+                stack.append(expand_node_temp)
 
     return path
 
@@ -109,10 +126,11 @@ def dfs(grid: list[int]) -> None:
 def main():
     # initial state of problem of 8-puzzle
     initial_state = [
-        1, 2, 3,  # 0 1 2
-        -1, 5, 6,  # 3 4 5
-        4, 7, 8   # 6 7 8
+        1, 2, 3,
+        4, -1, 5,
+        8, 6, 7
     ]
+    # print(is_solvable(initial_state))
     """
     goal state
     1 2 3 
