@@ -1,5 +1,3 @@
-import random
-
 
 def calculate_heuristic_misplaced_tails(puzzle: list[int]) -> int:
     """
@@ -108,8 +106,8 @@ def main():
     # initial state of problem of 8-puzzle
     initial_state = [
         1, 2, 3,  # 0 1 2
-        4, 5, -1,  # 3 4 5
-        6, 7, 8   # 6 7 8
+        4, 5, 6,  # 3 4 5
+        -1, 7, 8   # 6 7 8
     ]
     """
     goal state
