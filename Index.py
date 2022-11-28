@@ -65,6 +65,8 @@ def check_direction(current_puzzle: list[int]) -> list:
 
 
 def print_grid(grid: list[list[int]]) -> None:
+    if not grid:
+        return
     for i, v in enumerate(grid):
         for x, j in enumerate(v):
             if x % 3 == 0:
@@ -73,7 +75,7 @@ def print_grid(grid: list[list[int]]) -> None:
         print(f"\n{'#' * 40}({i + 1})")
 
 
-def dfs(grid: list[int]) -> list[list[int]]:
+def dfs(grid: list[int]) -> None:
     """
 
     Args:
@@ -98,7 +100,9 @@ def dfs(grid: list[int]) -> list[list[int]]:
             generate_new_swap_list(index_blank, move, expand_node)
             stack.append(expand_node)
     if not stack:
-        print("Not solvable")
+        print("Not solvable 😢")
+        return None
+
     return path
 
 
@@ -106,8 +110,8 @@ def main():
     # initial state of problem of 8-puzzle
     initial_state = [
         1, 2, 3,  # 0 1 2
-        4, 5, 6,  # 3 4 5
-        -1, 7, 8   # 6 7 8
+        -1, 5, 6,  # 3 4 5
+        4, 7, 8   # 6 7 8
     ]
     """
     goal state
