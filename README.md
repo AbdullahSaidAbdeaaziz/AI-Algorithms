@@ -63,4 +63,4 @@
 
 ### Breadth First Search 🔎
 
-> Travel over tree to Reach Its breadth first. For more [depth](https://algotree.org/algorithms/tree_graph_traversal/breadth_first_search/)
+> Travel over tree to Reach Its breadth first. For more [breadth](https://algotree.org/algorithms/tree_graph_traversal/breadth_first_search/)
