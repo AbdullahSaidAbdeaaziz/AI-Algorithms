@@ -7,6 +7,7 @@
 - [Run](#run)
 - [Algorithms](#algorithms)
   - [DFS](#depth-first-search-🔎)
+  - [BFS](#breadth-first-search-🔎)
 
 ---
 
@@ -56,6 +57,10 @@
 
 ## Algorithms
 
-## Depth First Search 🔎
+### Depth First Search 🔎
 
 > Travel over tree to Reach Its depth first. For more [depth](https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/)
+
+### Breadth First Search 🔎
+
+> Travel over tree to Reach Its breadth first. For more [depth](https://algotree.org/algorithms/tree_graph_traversal/breadth_first_search/)
