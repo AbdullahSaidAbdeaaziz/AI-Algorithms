@@ -17,7 +17,7 @@
 
 ## Requirement
 
-1. Install python on your PC.
+- Install python on your PC.
     - **Windows**
         - go to website and Install it [Python](https://www.python.org/downloads/windows/) choose Windows Installer (64 or 32 `depend on your PC`).
 
@@ -34,6 +34,13 @@
           ```shell
           sudo apt install python3.10
           ```
+          
+        - Fedora
+          
+          ```shell
+          sudo dnf install python3.10
+          ```
+          
 
 ## Run
 
