@@ -8,6 +8,7 @@
 - [Algorithms](#algorithms)
   - [DFS](#depth-first-search-🔎)
   - [BFS](#breadth-first-search-🔎)
+- [Parallel](#parallel)
 
 ---
 
@@ -71,3 +72,7 @@
 ### Breadth First Search 🔎
 
 > Travel over tree to Reach Its breadth first. For more [breadth](https://algotree.org/algorithms/tree_graph_traversal/breadth_first_search/)
+
+## Parallel 
+
+- Here we go..
