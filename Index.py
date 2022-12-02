@@ -107,7 +107,7 @@ def print_grid(grid: list[list[int]], directions: list[str]) -> None:
         grid: state of 8-puzzle problem
 
     Returns:
-        None (print grid)
+        None (print grid with its move that performed)
 
     """
     if not grid:
@@ -225,9 +225,9 @@ def main():
         -1, 7, 8
     ]
 
-    #-------------------------------------------
-    #DFS Algorithm time: 52.25959587097168
-    #BFS Algorithm time: 1.3240139484405518
+    # -------------------------------------------
+    # DFS Algorithm time: 52.25959587097168
+    # BFS Algorithm time: 1.3240139484405518
     # initial_state = [
     #     1, 2, 3,
     #     4, 5, -1,
@@ -264,8 +264,6 @@ def main():
     print(f"{'😍' * 20} End BFS {'😍' * 20}")
     end = time.time()
     print(f"BFS Algorithm time: {end - start}")
-
-
 
 
 if __name__ == "__main__":
